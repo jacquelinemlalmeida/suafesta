@@ -1,0 +1,14 @@
+<template id="guest-template">
+  <div class="guest-row flex flex-wrap gap-2 items-end mb-2">
+    <select class="guest-type border rounded px-2 py-1" data-action="change->guests#toggle">
+      <option value="adult">Adulto</option>
+      <option value="child">Criança</option>
+    </select>
+
+    <input type="text" placeholder="Nome" class="guest-name border rounded px-2 py-1 flex-1" />
+    <input type="text" placeholder="RG" class="guest-rg rg-field border rounded px-2 py-1 flex-1" />
+    <input type="number" placeholder="Idade" class="guest-age age-field border rounded px-2 py-1 flex-1 hidden" />
+
+    <button type="button" data-action="guests#remove" class="text-red-500 text-xl">🗑️</button>
+  </div>
+</template>

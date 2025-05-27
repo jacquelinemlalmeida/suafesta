@@ -1,0 +1,18 @@
+<h1>Relatório de Presença</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="padding-right: 40px;">Nome</th>
+      <th>RG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @linhas.each do |linha| %>
+      <tr>
+        <td style="padding-right: 40px;"><%= linha[:nome] %></td>
+        <td><%= linha[:rg] || '---' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

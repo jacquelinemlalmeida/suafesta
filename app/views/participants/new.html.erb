@@ -1,0 +1,68 @@
+<div class="min-h-screen bg-blue-50 flex flex-col lg:flex-row items-center justify-center px-4 py-10 space-y-8 lg:space-y-0 lg:space-x-10">
+  <!-- Imagem temática -->
+  <div class="w-full max-w-sm lg:max-w-md">
+    <%= image_tag "bolo-de-aniversario.png", alt: "Festa Infantil", class: "rounded-xl shadow-lg w-full object-contain" %>
+  </div>
+
+  <!-- Formulário -->
+  <div class="bg-white ml-4 rounded-2xl shadow-xl w-full max-w-2xl p-6 sm:p-8">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-purple-700">Festa da Mariana - 3 Aninhos 🎉</h1>
+      <p class="text-md sm:text-lg text-purple-600 mt-2">Jose Clementino Bettega 120 - Salão Gourmet</p>
+    </div>
+    <turbo-frame id="participant_form">
+      <%= form_with model: @participant, data: { turbo_frame: "_top", controller: 'flash' } do |f| %>
+        <% if @participant.errors.any? %>
+          <div id="form-errors" class="hidden">
+            <ul>
+              <% @participant.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="space-y-4">
+          <div>
+            <%= f.label :full_name, "Nome completo", class: "block font-semibold text-purple-800 mb-1" %>
+            <%= f.text_field :full_name, class: "w-full border rounded px-3 py-2 focus:ring-2 focus:ring-purple-300" %>
+          </div>
+
+          <div>
+            <%= f.label :phone, "Telefone", class: "block font-semibold text-purple-800 mb-1" %>
+            <%= f.telephone_field :phone, class: "w-full border rounded px-3 py-2 focus:ring-2 focus:ring-purple-300" %>
+          </div>
+
+          <div>
+            <%= f.label :rg, "RG", class: "block font-semibold text-purple-800 mb-1" %>
+            <%= f.text_field :rg, class: "w-full border rounded px-3 py-2 focus:ring-2 focus:ring-purple-300" %>
+          </div>
+        </div>
+
+        <hr class="my-6 border-purple-200" />
+
+        <div data-controller="guests">
+          <h2 class="text-xl font-semibold text-purple-700 mb-4">Convidados</h2>
+
+          <div data-guests-target="container" class="space-y-3">
+
+          </div>
+
+          <button type="button" data-action="guests#add" class="mt-4 flex items-center text-purple-700 hover:text-purple-900 font-medium">
+            <span class="text-2xl mr-1">➕</span> Adicionar Convidado
+          </button>
+        </div>
+
+        <div class="text-center mt-8">
+          <%= f.submit "Confirmar Presença", class: "cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-lg shadow" %>
+        </div>
+      <% end %>
+    </turbo-frame>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <div data-flash-success="<%= j flash[:notice] %>"></div>
+<% end %>
+
+<%= render "participants/guest_fields_template" %>

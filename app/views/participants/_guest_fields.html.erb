@@ -1,0 +1,20 @@
+<div class="guest-form flex flex-wrap items-end gap-2 mb-4">
+  <div>
+    <%= f.select :guest_type, Guest.guest_types.keys.map { |t| [t.titleize, t] }, {}, class: "border rounded px-2 py-1 guest-type" %>
+  </div>
+
+  <div>
+    <%= f.text_field :name, placeholder: "Nome", class: "border rounded px-2 py-1 name-field" %>
+  </div>
+
+  <div class="rg-field" style="<%= f.object.guest_type == 'adult' ? '' : 'display:none;' %>">
+    <%= f.text_field :rg, placeholder: "RG", class: "border rounded px-2 py-1" %>
+  </div>
+
+  <div class="age-field" style="<%= f.object.guest_type == 'child' ? '' : 'display:none;' %>">
+    <%= f.number_field :age, placeholder: "Idade", class: "border rounded px-2 py-1" %>
+  </div>
+
+  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+  <button type="button" class="remove-guest text-red-600 ml-2 text-xl">🗑️</button>
+</div>
