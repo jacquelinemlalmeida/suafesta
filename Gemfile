@@ -56,3 +56,5 @@ gem "jsbundling-rails", "~> 1.3"
 gem 'wicked_pdf'
 
 gem 'wkhtmltopdf-binary'
+
+gem "cgi", ">= 0.3.3"
