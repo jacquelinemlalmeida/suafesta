@@ -1,9 +1,5 @@
 app = "suafesta"
-
 primary_region = "gru"
-
-[build]
-  image = "ruby:3.1"
 
 [env]
   RAILS_ENV = "production"
@@ -27,9 +23,9 @@ primary_region = "gru"
     port = 443
 
   [services.concurrency]
+    type = "connections"
     hard_limit = 25
     soft_limit = 20
-    type = "connections"
 
   [[services.http_checks]]
     interval = "10s"
@@ -38,4 +34,3 @@ primary_region = "gru"
     method = "get"
     path = "/"
     protocol = "http"
-    restart_limit = 0
