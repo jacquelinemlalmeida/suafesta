@@ -10,7 +10,8 @@ gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 6.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+#gem 'sass-rails', '>= 6'
+gem "sprockets-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
