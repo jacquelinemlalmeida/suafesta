@@ -1,12 +1,11 @@
-app = "festavip" # ou o nome do seu app no Fly.io
-
-primary_region = "gru" # ou altere para o mais próximo de você
-
-[build]
-# Sem buildpacks — usa Dockerfile automaticamente
+app = "festavip"
+primary_region = "gru"
 
 [env]
 RAILS_ENV = "production"
+
+[build]
+  secrets = ["RAILS_MASTER_KEY"]
 
 [http_service]
 internal_port = 3000
@@ -15,7 +14,3 @@ auto_stop_machines = true
 auto_start_machines = true
 min_machines_running = 0
 processes = ["app"]
-
-[[vm]]
-size = "shared-cpu-1x"
-memory = "512mb"
