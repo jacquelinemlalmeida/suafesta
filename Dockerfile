@@ -1,5 +1,5 @@
 # Use imagem oficial do Ruby
-FROM ruby:3.1
+FROM ruby:3.1.0
 
 # Variáveis padrão de ambiente
 ENV RAILS_ENV=production \
