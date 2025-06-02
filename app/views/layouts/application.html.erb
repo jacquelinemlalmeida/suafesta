@@ -12,7 +12,14 @@
 
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="flex min-h-screen">
+    <% if show_sidebar? %>
+      <%= render "layouts/shared/sidebar" %>
+    <% end %>
+
+    <main class="flex-1 ml-64 p-6">
+      <%= yield %>
+    </main>
   </body>
+
 </html>

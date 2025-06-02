@@ -47,4 +47,8 @@ Abaixo estão os conceitos aprendidos em aula e aplicados neste projeto, junto c
    - Utilizado para garantir que o ambiente de desenvolvimento seja idêntico para todos os colaboradores, com Ruby, Yarn, Node e PostgreSQL prontos para uso com um clique via VSCode.
 
 5. **Atualização dinâmica: Hotwire Stimulus**
+
    - Utilizados para criar interatividade e atualizações dinâmicas na interface do usuário sem depender de JavaScript pesado ou frameworks como React/Vue. No projeto FestaVIP, o Stimulus é usado para controlar a adição e remoção de convidados no formulário de forma fluida, enquanto o Turbo (parte do Hotwire) permite atualizações parciais de página sem recarregar tudo — tornando a experiência mais rápida e amigável.
+
+6. **Lambdas**
+   - Utilização uma função lambda na model Guest para validar a presença do RG apenas quando o tipo de convidado é adult. Isso é necessário porque, no momento em que a validação é definida, o método guest_type ainda não está disponível. O lambda garante que a verificação só ocorra em tempo de execução, quando a instância já está completamente carregada.

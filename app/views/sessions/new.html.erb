@@ -1,0 +1,25 @@
+<div class="min-h-screen bg-yellow-50 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md text-center" style="max-width:600px;">
+    <h2 class="text-3xl font-extrabold text-purple-600 mb-6">FestaVIP</h2>
+
+    <%= form_with url: sessions_path, method: :post do %>
+      <div class="mb-4">
+        <%= label_tag :email, "Email", class: "block text-left font-semibold text-purple-800" %>
+        <%= email_field_tag :email, nil, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <div class="mb-6">
+        <%= label_tag :password, "Senha", class: "block text-left font-semibold text-purple-800" %>
+        <%= password_field_tag :password, nil, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <%= submit_tag "Entrar", class: "w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600" %>
+      <div class="mt-4 text-center">
+        <p class="text-sm text-gray-700">
+          Ainda não se registrou?
+          <%= link_to "Clique aqui para se cadastrar", new_user_path, class: "text-purple-700 hover:underline font-semibold" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
