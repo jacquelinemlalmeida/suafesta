@@ -14,11 +14,9 @@ RUN bundle install && yarn install
 
 COPY . .
 
-# 🔑 Recebe o secret no build
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
-# ✅ Usa a master key como variável de ambiente (sem arquivo físico)
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 EXPOSE 3000
