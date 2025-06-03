@@ -1,0 +1,18 @@
+<h1 class="text-3xl font-extrabold text-purple-700 mb-6">🎉 Suas Festas</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% @parties.each do |party| %>
+    <% participants_count = party.participants.count %>
+    <% guests_count = Guest.joins(:participant).where(participants: { party_id: party.id }).count %>
+
+    <div class="bg-pink-100 p-6 rounded-2xl shadow-lg text-center">
+      <h2 class="text-xl font-bold text-pink-600 mb-2"><%= party.birthday_person_name %> 🎂</h2>
+      <p class="text-sm text-gray-700 mb-1"><strong>Idade:</strong> <%= party.birthday_person_age %> anos</p>
+      <p class="text-sm text-gray-700 mb-1"><strong>Data:</strong> <%= l(party.scheduled_at, format: :long) %></p>
+      <p class="text-lg font-semibold text-pink-700 mt-2">
+        👨‍👩‍👧‍👦 <%= participants_count + guests_count %> convidados
+      </p>
+      <%= link_to "Ver detalhes", party_path(party), class: "inline-block mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>

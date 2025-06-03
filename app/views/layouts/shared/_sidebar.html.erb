@@ -4,11 +4,9 @@
 
     <nav>
       <ul class="space-y-2">
-        <% if can? :read, Guest %>
-          <li>
-            <%= link_to "Convidados", "", class: "block px-4 py-2 rounded hover:bg-pink-200 transition" %>
-          </li>
-        <% end %>
+        <li class="mb-2">
+          <%= link_to "Minhas Festas", parties_path, class: "hover:text-purple-700" %>
+        </li>
 
         <% if can? :manage, User %>
           <li>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :parties, dependent: :destroy
   has_secure_password
 
   enum role: { usuario: 0, admin: 1 }

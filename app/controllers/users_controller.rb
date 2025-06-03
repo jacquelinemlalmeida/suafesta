@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  layout "public", only: [:new]
+
   def new
     @user = User.new
   end

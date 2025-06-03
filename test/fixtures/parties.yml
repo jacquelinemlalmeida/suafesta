@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  scheduled_at: 2025-06-03 11:49:32
+  street: MyString
+  number: MyString
+  city: MyString
+  state: MyString
+  birthday_person_name: MyString
+  birthday_person_age: 1
+  status: 1
+  timestamps: MyString
+
+two:
+  user: two
+  scheduled_at: 2025-06-03 11:49:32
+  street: MyString
+  number: MyString
+  city: MyString
+  state: MyString
+  birthday_person_name: MyString
+  birthday_person_age: 1
+  status: 1
+  timestamps: MyString

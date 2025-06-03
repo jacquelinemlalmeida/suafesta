@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  # Session
   resources :sessions, only: [:create, :destroy]
   get "/login", to: "sessions#new", as: :login
-  delete "/logout", to: "sessions#destroy", as: :logout
+  get "/logout", to: "sessions#destroy", as: :logout
 
   # Participantes
   resources :participants do
@@ -13,6 +13,12 @@ Rails.application.routes.draw do
 
   # Usuários
   resources :users, only: [:new, :create]
+
+  # Festas
+  resources :parties
+
+  #dashboard
+  get "/dashboard", to: "dashboard#index"
 
   root to: "sessions#new"
 end
