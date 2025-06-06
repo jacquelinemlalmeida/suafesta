@@ -1,33 +1,41 @@
 <div class="min-h-screen bg-blue-50 p-6">
   <div class="max-w-5xl mx-auto">
-    <h1 class="text-3xl font-extrabold text-center text-purple-700 mb-6">🎈 Relatório de Presença 🎉</h1>
+    <h1 class="text-3xl font-extrabold text-center text-purple-700 mb-6">Relatório de Presença</h1>
 
-    <table class="w-full text-left border-collapse rounded-lg overflow-hidden shadow-lg">
-      <thead class="bg-pink-300 text-white">
-        <tr>
-          <th class="px-4 py-3">Nome</th>
-          <th class="px-4 py-3">Tipo</th>
-          <th class="px-4 py-3">Faixa Etária</th>
-          <th class="px-4 py-3">RG</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white">
-        <% @linhas.each_with_index do |linha, i| %>
-          <tr class="<%= i.even? ? 'bg-yellow-50' : 'bg-pink-50' %>">
-            <td class="px-4 py-2"><%= linha[:nome] %></td>
-            <td class="px-4 py-2"><%= linha[:tipo] %></td>
-            <td class="px-4 py-2"><%= linha[:faixa] %></td>
-            <td class="px-4 py-2"><%= linha[:rg] %></td>
+    <% cache ["tabela_presenca", @linhas_updated_at] do %>
+      <table class="w-full text-left border-collapse rounded-lg overflow-hidden shadow-lg">
+        <thead class="bg-pink-300 text-white">
+          <tr>
+            <th class="px-4 py-3">Nome</th>
+            <th class="px-4 py-3">Tipo</th>
+            <th class="px-4 py-3">Faixa Etária</th>
+            <th class="px-4 py-3">RG</th>
           </tr>
+        </thead>
+
+        <% cache ["tbody_presenca", @linhas_updated_at] do %>
+          <tbody class="bg-white">
+            <% @linhas.each_with_index do |linha, i| %>
+              <% cache ["linha", linha[:nome], linha[:updated_at]] do %>
+                <tr class="<%= i.even? ? 'bg-yellow-50' : 'bg-pink-50' %>">
+                  <td class="px-4 py-2"><%= linha[:nome] %></td>
+                  <td class="px-4 py-2"><%= linha[:tipo] %></td>
+                  <td class="px-4 py-2"><%= linha[:faixa] %></td>
+                  <td class="px-4 py-2"><%= linha[:rg] %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
         <% end %>
-      </tbody>
-    </table>
+      </table>
+    <% end %>
+
     <div class="text-center mt-6">
-    <%= link_to "📄 Baixar PDF",
+      <%= link_to "Baixar PDF",
             relatorio_path(segredo: Rails.application.credentials.dig(:presenca, :segredo), format: :pdf),
             target: "_blank",
             rel: "noopener noreferrer",
             class: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded shadow" %>
-
+    </div>
   </div>
 </div>

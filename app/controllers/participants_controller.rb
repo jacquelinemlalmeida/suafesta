@@ -29,7 +29,8 @@ class ParticipantsController < ApplicationController
         nome: participant.full_name,
         tipo: "Participante",
         faixa: "Adulto",
-        rg: participant.rg
+        rg: participant.rg,
+        updated_at: participant.updated_at
       }
 
       participant.guests.each do |guest|
@@ -37,10 +38,13 @@ class ParticipantsController < ApplicationController
           nome: guest.name,
           tipo: "Convidado",
           faixa: guest.guest_type == "adult" ? "Adulto" : "Criança",
-          rg: guest.guest_type == "adult" ? guest.rg : "--"
+          rg: guest.guest_type == "adult" ? guest.rg : "--",
+          updated_at: guest.updated_at
         }
       end
     end
+
+    @linhas_updated_at = @linhas.map { |l| l[:updated_at] }.max
 
     respond_to do |format|
       format.html
