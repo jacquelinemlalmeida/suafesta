@@ -17,10 +17,10 @@ WORKDIR /app
 
 COPY . .
 
-COPY Gemfile* ./
-
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+COPY package.json yarn.lock ./
 RUN yarn install
 
 EXPOSE 3000

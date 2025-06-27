@@ -20,6 +20,13 @@ cd nome-do-projeto
 
 # Inicie o projeto dentro do dev container
 
+# Inicie o projeto localmente
+
+- Baixe ruby 3.1.0,
+- Instale o bundler
+- Execute bundle install
+- rails db:create / rails db:migrate e por fim rails db:seeds para poder utilizar o sistema já com alguns usuários
+
 ✅ Funcionalidades implementadas
 
 Cadastro e login de usuários com autenticação

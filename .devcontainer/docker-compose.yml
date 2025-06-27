@@ -9,8 +9,10 @@ services:
     command: sleep infinity
     depends_on:
       - redis
+      - db
     environment:
       REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgres://postgres:postgres@db:5432/suafesta_development
     ports:
       - "3000:3000"
 
@@ -18,3 +20,18 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: suafesta_development
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
