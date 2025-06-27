@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+
+  mount Sidekiq::Web => '/sidekiq'
 
  # Session
   resources :sessions, only: [:create, :destroy]
@@ -15,7 +19,11 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   # Festas
-  resources :parties
+  resources :parties do
+    member do
+      get :relatorio
+    end
+  end
 
   #dashboard
   get "/dashboard", to: "dashboard#index"

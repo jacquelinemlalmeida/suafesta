@@ -18,10 +18,6 @@ class ParticipantsController < ApplicationController
   end
 
   def relatorio
-    unless params[:segredo] == Rails.application.credentials.dig(:presenca, :segredo)
-      head :unauthorized and return
-    end
-
     @linhas = []
 
     Participant.includes(:guests).find_each do |participant|

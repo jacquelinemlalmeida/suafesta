@@ -1,0 +1,64 @@
+<div class="min-h-screen bg-blue-50 p-6">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-center text-purple-700 mb-6">
+      Detalhes da Festa
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-bold text-pink-600 mb-2">Informações da Festa</h2>
+        <p><strong>Nome do Aniversariante:</strong> <%= @party.birthday_person_name %></p>
+        <p><strong>Idade:</strong> <%= @party.birthday_person_age %> anos</p>
+        <p><strong>Data:</strong> <%= l(@party.scheduled_at, format: :long) %></p>
+        <p><strong>Endereço:</strong> <%= [@party.street, @party.number, @party.city, @party.state].compact.join(", ") %></p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow mt-4">
+        <h2 class="text-xl font-bold text-pink-600 mb-2">Estimativa de Consumo</h2>
+
+        <p><strong>Adultos:</strong> <%= @adultos %> — <%= @resources[:adult_food_quantity_grams] %> g de comida, <%= @resources[:adult_beverage_quantity_ml] %> ml de bebida</p>
+        <p><strong>Crianças:</strong> <%= @criancas %> — <%=  @resources[:chield_food_quantity_grams] %> g de comida, <%= @resources[:chield_beverage_quantity_ml] %> ml de bebida</p>
+        <hr class="my-2">
+        <p><strong>Total:</strong> <%= @resources[:total_food_kg] %> kg comida, <%= @resources[:total_beverage_liters] %> litros de bebida</p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-extrabold text-purple-600 mb-4 text-center mt-4">Participantes e Convidados</h2>
+
+    <% cache ["tabela_presenca_festa", @lines_updated_at] do %>
+      <table class="w-full text-left border-collapse rounded-lg overflow-hidden shadow-lg">
+        <thead class="bg-pink-300 text-white">
+          <tr>
+            <th class="px-4 py-3">Nome</th>
+            <th class="px-4 py-3">Tipo</th>
+            <th class="px-4 py-3">Faixa Etária</th>
+            <th class="px-4 py-3">RG</th>
+          </tr>
+        </thead>
+
+        <% cache ["tbody_presenca_festa", @lines_updated_at] do %>
+          <tbody class="bg-white">
+            <% @lines.each_with_index do |line, i| %>
+              <% cache ["line_festa", line[:nome], line[:updated_at]] do %>
+                <tr class="<%= i.even? ? 'bg-yellow-50' : 'bg-pink-50' %>">
+                  <td class="px-4 py-2"><%= line[:nome] %></td>
+                  <td class="px-4 py-2"><%= line[:tipo] %></td>
+                  <td class="px-4 py-2"><%= line[:faixa] %></td>
+                  <td class="px-4 py-2"><%= line[:rg] %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
+
+    <div class="text-center mt-6">
+      <%= link_to "📄 Baixar PDF do Relatório de Presença",
+            relatorio_party_path(@party, format: :pdf),
+            target: "_blank",
+            rel: "noopener noreferrer",
+            class: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded shadow" %>
+    </div>
+  </div>
+</div>

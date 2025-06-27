@@ -6,6 +6,9 @@ default: &default
 development:
   <<: *default
   database: suafesta_development
+  user: postgres
+  password: postgres
+  host: localhost
 
 test:
   <<: *default

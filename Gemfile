@@ -60,3 +60,8 @@ gem 'wkhtmltopdf-binary'
 gem "cgi", ">= 0.3.3"
 
 gem "nokogiri", "1.14.2", require: false
+
+gem 'sidekiq'
+
+# agendar os emails
+gem 'sidekiq-cron'

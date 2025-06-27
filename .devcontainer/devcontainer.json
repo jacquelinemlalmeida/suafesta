@@ -1,6 +1,7 @@
 {
   "name": "Ruby on Rails Dev Container",
-  "dockerFile": "Dockerfile",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
   "appPort": [3000],
   "postCreateCommand": "bundle install && yarn install && bin/setup || true",
   "remoteUser": "vscode",
