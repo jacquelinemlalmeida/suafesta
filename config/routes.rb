@@ -29,4 +29,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "dashboard#index"
 
   root to: "sessions#new"
+
+  get 'party/:id/public/:url_ending', to: 'participants#new', as: :party_form
+  post 'party/:id/public/:url_ending', to: 'participants#create'
 end

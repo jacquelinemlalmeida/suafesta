@@ -11,7 +11,7 @@
       <p class="text-md sm:text-lg text-purple-600 mt-2">Jose Clementino Bettega 120 - Salão Gourmet</p>
     </div>
     <turbo-frame id="participant_form">
-      <%= form_with model: @participant, data: { turbo_frame: "_top", controller: 'flash' } do |f| %>
+      <%= form_with model: @participant, url: party_form_url(@party.id, @party.url_ending), data: { turbo_frame: "_top", controller: 'flash' } do |f| %>
         <% if @participant.errors.any? %>
           <div id="form-errors" class="hidden">
             <ul>

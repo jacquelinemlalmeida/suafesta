@@ -6,7 +6,8 @@ module ApplicationHelper
   end
 
   def show_sidebar?
-    !(on_login_page? || on_signup_page?)
+    path = request.path
+    !(on_login_page? || on_signup_page? || path.include?("/public/"))
   end
 
   def on_login_page?

@@ -23,6 +23,17 @@
       </div>
     </div>
 
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 rounded mb-6">
+      <p>
+        Para compartilhar com os convidados, envie este link de confirmação de presença:
+        <strong>
+          <%= link_to party_form_path(@party.id, @party.url_ending), target: "_blank", class: "text-xl underline text-purple-700" do %>
+            <%= party_form_url(@party.id, @party.url_ending) %>
+          <% end %>
+        </strong>
+      </p>
+    </div>
+
     <h2 class="text-2xl font-extrabold text-purple-600 mb-4 text-center mt-4">Participantes e Convidados</h2>
 
     <% cache ["tabela_presenca_festa", @lines_updated_at] do %>

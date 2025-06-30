@@ -1,14 +1,19 @@
 class ParticipantsController < ApplicationController
   def new
-    @participant = Participant.new
+    @party = Party.find_by(id: params[:id])
+    return redirect_to root_path, alert: "Festa não encontrada." unless @party
+
+    @participant = @party.participants.new
     @participant.guests.build
   end
 
   def create
-    @participant = Participant.new(participant_params)
+    @party = Party.find_by(id: params[:id])
+    return redirect_to root_path, alert: "Festa não encontrada." unless @party
+    @participant = @party.participants.new(participant_params)
 
     if @participant.save
-      redirect_to new_participant_path, notice: "Presença confirmada com sucesso!"
+      redirect_to party_form_path(@party.id, @party.url_ending), notice: "Presença confirmada com sucesso!"
     else
       render :new, status: :unprocessable_entity
     end
